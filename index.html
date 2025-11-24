@@ -1,18 +1,203 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Coming Soon</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        text-align: center;
-        margin-top: 100px;
-        background-color: #f4f4f4;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>🚧 Coming Soon</h1>
-    <p>This dashboard is under construction.</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FornaxBot - Home</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: radial-gradient(ellipse at top left, #23272a 60%, #0a0a13 100%), url('assets/stars-bg.png');
+      color: #fff;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .navbar {
+      background: rgba(44,47,51,0.95);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      height: 70px;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px 0 rgba(114,137,218,0.15);
+      border-bottom: 1px solid #23272a;
+    }
+    .navbar-brand {
+      font-size: 1.7em;
+      color: #7289da;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-shadow: 0 0 8px #7289da, 0 0 16px #23272a;
+    }
+    .logo-img {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: #23272a;
+      box-shadow: 0 2px 8px rgba(255, 80, 0, 0.3), 0 0 12px #7289da;
+    }
+    .navbar-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.2s, text-shadow 0.2s;
+      text-shadow: 0 0 6px #23272a;
+    }
+    .navbar-links li a:hover {
+      color: #ff4e00;
+      text-shadow: 0 0 12px #ff4e00, 0 0 24px #7289da;
+    }
+    .content {
+      padding: 40px;
+      margin-top: 30px;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    .hero-logo {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 24px;
+      border-radius: 50%;
+      box-shadow: 0 0 48px 8px #ff4e00, 0 0 32px 4px #7289da;
+      background: #23272a;
+      border: 2px solid #7289da;
+    }
+    .hero h1 {
+      font-size: 2.7em;
+      color: #00cfff;
+      text-shadow: 0 0 24px #ff4e00, 0 0 32px #00cfff;
+      letter-spacing: 2px;
+    }
+    .hero p {
+      font-size: 1.2em;
+      color: #99aab5;
+      text-shadow: 0 0 8px #23272a;
+    }
+    .btn {
+      background: linear-gradient(90deg, #ff4e00 0%, #7289da 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 0 16px #ff4e00, 0 0 8px #7289da;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #7289da 0%, #ff4e00 100%);
+      box-shadow: 0 0 32px #ff4e00, 0 0 16px #7289da;
+    }
+    .features {
+      margin-bottom: 60px;
+    }
+    .feature-list {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .feature-item {
+      background: rgba(35,39,42,0.95);
+      padding: 24px;
+      border-radius: 10px;
+      flex: 1;
+      min-width: 220px;
+      box-shadow: 0 2px 16px rgba(255,80,0,0.15), 0 0 8px #7289da;
+      border: 1px solid #7289da;
+    }
+    .feature-item h3 {
+      color: #ff4e00;
+      text-shadow: 0 0 8px #7289da;
+    }
+    .docs, .community {
+      margin-bottom: 60px;
+    }
+    .footer {
+      background: rgba(44,47,51,0.95);
+      text-align: center;
+      padding: 20px 0;
+      color: #99aab5;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 12px #7289da;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img src="assets/fornax-logo-transparent.png" alt="FornaxBot Logo" class="logo-img" />
+      FornaxBot
+    </div>
+    <ul class="navbar-links">
+      <li><a href="pages/home.html">Home</a></li>
+      <li><a href="pages/features.html">Features</a></li>
+      <li><a href="pages/docs.html">Docs</a></li>
+      <li><a href="pages/community.html">Community</a></li>
+      <li><a href="pages/dashboard.html">Bot Dashboard</a></li>
+    </ul>
+  </nav>
+  <main class="content">
+    <section class="hero">
+      <img src="assets/fornax-logo-transparent.png" alt="FornaxBot Logo" class="hero-logo" />
+      <h1>Welcome to FornaxBot</h1>
+      <p>The all-in-one Discord bot and platform. Explore features, documentation, and join our community!</p>
+      <a href="#get-started" class="btn">Get Started</a>
+    </section>
+    <section id="features" class="features">
+      <h2>Features</h2>
+      <div class="feature-list">
+        <div class="feature-item">
+          <h3>Moderation</h3>
+          <p>Powerful tools to keep your server safe and organized.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Music</h3>
+          <p>High-quality music playback and controls.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Custom Commands</h3>
+          <p>Create and manage your own commands easily.</p>
+        </div>
+        <!-- Add more features as needed -->
+      </div>
+    </section>
+    <section id="docs" class="docs">
+      <h2>Documentation</h2>
+      <p>Find guides, API references, and tutorials to get the most out of FornaxBot.</p>
+      <a href="#" class="btn">View Docs</a>
+    </section>
+    <section id="community" class="community">
+      <h2>Community</h2>
+      <p>Join our Discord server, follow us on social media, and connect with other users.</p>
+      <a href="#" class="btn">Join Discord</a>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>&copy; 2025 FornaxBot. All rights reserved.</p>
+  </footer>
+</body>
 </html>
