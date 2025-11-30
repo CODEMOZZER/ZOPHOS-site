@@ -53,12 +53,14 @@
       color: #eaf6ff;
       text-decoration: none;
       font-size: 1.1em;
-      transition: color 0.2s, text-shadow 0.2s;
-      text-shadow: 0 0 6px #10131a;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-bottom 0.2s;
     }
+    .navbar-links li.active a,
     .navbar-links li a:hover {
       color: #00cfff;
-      text-shadow: 0 0 12px #00cfff, 0 0 24px #10131a;
+      border-bottom: 2px solid #00cfff;
     }
     .content {
       padding: 40px;
