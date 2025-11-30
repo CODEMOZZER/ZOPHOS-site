@@ -10,6 +10,45 @@
 <body>
   <!-- Navigation and community content will be included here -->
   <h1>Community</h1>
-  <p>Join our Discord server and connect with other users.</p>
+  <p>A communication place where everyone can chat, connect, and share. Join our Discord server and Roblox group to meet other Zophos members!</p>
+  <div class="community-actions">
+    <a href="#" class="btn">Join Discord Chat</a>
+    <a href="#" class="btn">Join Roblox Group</a>
+  </div>
+
+  <h1>Community Forum</h1>
+  <p>Welcome to the Zophos community forum! Chat, share, and connect. Roles give special permissions—owners can delete any message.</p>
+  <div class="forum-board">
+    <div class="forum-message">
+      <span class="forum-user owner">CODEMOZZER <span class="role-badge owner">Owner</span></span>
+      <span class="forum-text">Welcome to the forum! Feel free to post and chat.</span>
+      <button class="delete-btn">Delete</button>
+    </div>
+    <div class="forum-message">
+      <span class="forum-user member">User123 <span class="role-badge member">Member</span></span>
+      <span class="forum-text">Hi everyone! Excited to join Zophos.</span>
+    </div>
+    <div class="forum-message">
+      <span class="forum-user member">RobloxFan <span class="role-badge member">Member</span></span>
+      <span class="forum-text">How do I join the Roblox group?</span>
+    </div>
+    <!-- Add more messages here -->
+  </div>
+  <form class="forum-form">
+    <input type="text" placeholder="Type your message..." class="forum-input" />
+    <button type="submit" class="btn">Post</button>
+  </form>
+  <style>
+    .forum-board { margin: 32px 0; background: #181a24; border-radius: 10px; padding: 18px; }
+    .forum-message { display: flex; align-items: center; margin-bottom: 14px; }
+    .forum-user { font-weight: bold; margin-right: 10px; }
+    .role-badge { font-size: 0.8em; padding: 2px 8px; border-radius: 6px; margin-left: 4px; }
+    .role-badge.owner { background: #7a2cff; color: #fff; }
+    .role-badge.member { background: #39406a; color: #e7e9ff; }
+    .forum-text { flex: 1; }
+    .delete-btn { background: #e74c3c; color: #fff; border: none; border-radius: 6px; padding: 4px 10px; margin-left: 10px; cursor: pointer; font-size: 0.9em; }
+    .forum-form { display: flex; gap: 10px; margin-top: 18px; }
+    .forum-input { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #39406a; background: #23272a; color: #e7e9ff; }
+  </style>
 </body>
 </html>
