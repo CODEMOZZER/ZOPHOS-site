@@ -152,6 +152,35 @@
       text-shadow: 0 0 8px #00cfff, 0 0 16px #10131a;
       margin-left: 8px;
     }
+    .zp-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none; align-items: center; justify-content: center;
+      z-index: 9999;
+    }
+    .zp-modal {
+      width: min(90vw, 420px);
+      background: radial-gradient(circle at 30% -10%, #1a1d2e, #0b0e16);
+      border: 1px solid #2c3250;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      color: #e7e9ff;
+      padding: 20px;
+      text-align: center;
+    }
+    .zp-title { font-size: 1.25rem; margin: 0 0 6px; }
+    .zp-desc { font-size: 0.95rem; opacity: 0.9; margin-bottom: 16px; }
+    .zp-actions { display: flex; gap: 10px; justify-content: center; }
+    .zp-btn {
+      padding: 10px 14px; border-radius: 10px; border: 1px solid #39406a;
+      background: linear-gradient(180deg, #2b3257, #1d2343);
+      color: #e7e9ff; cursor: pointer;
+    }
+    .zp-btn-primary {
+      background: linear-gradient(180deg, #7a2cff, #3b0b96);
+      border-color: #7a2cff;
+    }
+    .zp-btn:hover { filter: brightness(1.1); }
   </style>
 </head>
 <body>
@@ -207,5 +236,80 @@
   <footer class="footer">
     <p>&copy; 2025 ZOPHOS. ALL RIGHTS RESERVED.</p>
   </footer>
+
+  <!-- Modal -->
+  <div id="zpBackdrop" class="zp-backdrop" role="dialog" aria-modal="true" aria-labelledby="zpTitle">
+    <div class="zp-modal">
+      <h2 id="zpTitle" class="zp-title">Play Now</h2>
+      <p class="zp-desc">Join our new Roblox game! Cosmic obby, neon vortex vibes, new stages, zero filler. Compete, chat, and explore with the Zophos community.</p>
+      <div class="zp-actions">
+        <a id="zpPlay" class="zp-btn zp-btn-primary" 
+           href="https://www.roblox.com/games/84376708122643/Only-1-Can-Beat-This-Obby#!/about" 
+           target="_blank" rel="noopener">Play now</a>
+        <button id="zpDismiss" class="zp-btn">Maybe later</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Config
+    const POPUP_INTERVAL_MS = 120000; // 2 minutes
+    const MAX_SHOWS_PER_SESSION = 5;  // cap so you don’t annoy people
+    const SESSION_KEY = 'zp_popup_shown_count';
+    const SNOOZE_KEY = 'zp_popup_snooze_until';
+
+    const backdrop = document.getElementById('zpBackdrop');
+    const dismissBtn = document.getElementById('zpDismiss');
+    const playBtn = document.getElementById('zpPlay');
+
+    function getCount() { return parseInt(sessionStorage.getItem(SESSION_KEY) || '0', 10); }
+    function setCount(n) { sessionStorage.setItem(SESSION_KEY, String(n)); }
+
+    function getSnoozeUntil() { return parseInt(sessionStorage.getItem(SNOOZE_KEY) || '0', 10); }
+    function setSnoozeUntil(ts) { sessionStorage.setItem(SNOOZE_KEY, String(ts)); }
+
+    function showModal() {
+      // Don’t show if tab hidden or cap reached or snoozed
+      if (document.hidden) return;
+      const count = getCount();
+      const now = Date.now();
+      if (count >= MAX_SHOWS_PER_SESSION) return;
+      if (getSnoozeUntil() > now) return;
+
+      backdrop.style.display = 'flex';
+      setCount(count + 1);
+    }
+
+    function hideModal(snoozeMs = POPUP_INTERVAL_MS) {
+      backdrop.style.display = 'none';
+      setSnoozeUntil(Date.now() + snoozeMs);
+    }
+
+    // Initial delayed show (optional: first popup after 30s)
+    setTimeout(showModal, 30000);
+
+    // Repeat every 2 minutes
+    setInterval(showModal, POPUP_INTERVAL_MS);
+
+    // Pause when tab is not visible; resume on return
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        // Try showing if snooze expired
+        setTimeout(showModal, 5000);
+      }
+    });
+
+    // Actions
+    dismissBtn.addEventListener('click', () => hideModal(POPUP_INTERVAL_MS));
+    playBtn.addEventListener('click', () => hideModal(POPUP_INTERVAL_MS * 2)); // longer snooze after click
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) hideModal(POPUP_INTERVAL_MS); // click outside to dismiss
+    });
+
+    // Accessibility: Escape key closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideModal(POPUP_INTERVAL_MS);
+    });
+  </script>
 </body>
 </html>
