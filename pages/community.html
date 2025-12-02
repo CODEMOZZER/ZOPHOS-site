@@ -132,24 +132,65 @@
       <a href="#" class="btn">Join Roblox Group</a>
     </div>
     <div class="forum-board">
-      <div class="forum-message">
-        <span class="forum-user owner">CODEMOZZER <span class="role-badge owner">Owner</span></span>
-        <span class="forum-text">Welcome to the forum! Feel free to post and chat.</span>
-        <button class="delete-btn">Delete</button>
-      </div>
-      <div class="forum-message">
-        <span class="forum-user member">User123 <span class="role-badge member">Member</span></span>
-        <span class="forum-text">Hi everyone! Excited to join Zophos.</span>
-      </div>
-      <div class="forum-message">
-        <span class="forum-user member">RobloxFan <span class="role-badge member">Member</span></span>
-        <span class="forum-text">How do I join the Roblox group?</span>
-      </div>
-      <!-- Add more messages here -->
+      <div id="chat-board"></div>
     </div>
     <form class="forum-form">
-      <input type="text" placeholder="Type your message..." class="forum-input" />
+      <input type="text" id="chat-username" placeholder="Your name (optional)" class="forum-input" style="max-width:180px;" />
+      <input type="text" id="chat-message" placeholder="Type your message..." class="forum-input" />
       <button type="submit" class="btn">Post</button>
+    </div>
+    <script>
+    const chatBoard = document.getElementById('chat-board');
+    const chatForm = document.querySelector('.forum-form');
+    const chatMessage = document.getElementById('chat-message');
+    const chatUsername = document.getElementById('chat-username');
+
+    function formatTimestamp(ts) {
+      const d = new Date(ts);
+      return d.toLocaleString();
+    }
+
+    function renderMessages(messages) {
+      chatBoard.innerHTML = '';
+      messages.forEach(msg => {
+        const div = document.createElement('div');
+        div.className = 'forum-message';
+        div.innerHTML = `
+          <span class="forum-user">${msg.username || 'Anonymous'}</span>
+          <span class="forum-text">${msg.message}</span>
+          <span style="margin-left:10px;font-size:0.9em;color:#7a2cff;">${formatTimestamp(msg.timestamp)}</span>
+        `;
+        chatBoard.appendChild(div);
+      });
+    }
+
+    async function fetchMessages() {
+      try {
+        const res = await fetch('/api/chat');
+        const messages = await res.json();
+        renderMessages(messages);
+      } catch (e) {
+        chatBoard.innerHTML = '<div style="color:red;">Failed to load messages.</div>';
+      }
+    }
+
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = chatUsername.value.trim() || 'Anonymous';
+      const message = chatMessage.value.trim();
+      if (!message) return;
+      await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, message })
+      });
+      chatMessage.value = '';
+      fetchMessages();
+    });
+
+    setInterval(fetchMessages, 5000);
+    fetchMessages();
+    </script>
     </form>
   </div>
 </body>
