@@ -10,8 +10,9 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # CockroachDB connection settings (replace with your credentials)
-DB_URL = os.getenv('DB_URL','postgresql://zamozzer:4bqveY60lK8Vduv1oC6mig@lowerdiscordbotallinone-10666.jxf.cockroachlabs.cloud:26257/zophos-site?sslmode=verify-full&sslrootcert=/home/codespace/.postgresql/root.crt')
 
+DB_URL = os.getenv('DB_URL','postgresql://zamozzer:4bqveY60lK8Vduv1oC6mig@lowerdiscordbotallinone-10666.jxf.cockroachlabs.cloud:26257/zophos-site?sslmode=verify-full&sslrootcert=/home/codespace/.postgresql/root.crt')
+print("DB_URL:", DB_URL)
 conn = psycopg2.connect(DB_URL, cursor_factory=RealDictCursor)
 
 # Forum table setup (run once in CockroachDB)
