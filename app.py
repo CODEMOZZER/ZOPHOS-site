@@ -76,5 +76,51 @@ def delete_message(msg_id):
             conn.commit()
             msg_id = cur.fetchone()['id']
         return jsonify({'id': msg_id, 'username': username, 'message': message})
+
+# Homepage route with site colors and centered text
+@app.route('/')
+def home():
+    return '''
+    <html>
+    <head>
+        <title>Zophos - Home</title>
+        <style>
+            body {
+                margin: 0;
+                font-family: 'Roboto', Arial, sans-serif;
+                background: radial-gradient(ellipse at center, #10131a 60%, #05060a 100%);
+                color: #eaf6ff;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .center-box {
+                background: #181a24;
+                border-radius: 12px;
+                padding: 48px 64px;
+                box-shadow: 0 2px 12px 0 rgba(0, 170, 255, 0.15);
+                text-align: center;
+            }
+            h1 {
+                color: #00cfff;
+                font-size: 2.5em;
+                margin-bottom: 18px;
+            }
+            p {
+                font-size: 1.2em;
+                color: #eaf6ff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center-box">
+            <h1>Welcome to Zophos!</h1>
+            <p>Your community site and chat API are running.<br>Visit <b>/community.html</b> to join the chat.</p>
+        </div>
+    </body>
+    </html>
+    '''
+
 if __name__ == '__main__':
     app.run(debug=True)
