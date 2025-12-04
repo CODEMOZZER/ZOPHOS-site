@@ -204,10 +204,40 @@ def community():
 def dashboard():
     return render_template('dashboard.html', title='Bot Dashboard')
 
+
 # Home page route
 @app.route('/home')
 def home_page():
     return render_template('home.html', title='Home')
+
+# Profile/account-related routes
+@app.route('/settings')
+def settings():
+    return render_template('account/settings.html', title='Settings')
+
+@app.route('/account/plan')
+def account_plan():
+    return render_template('account/plan.html', title='Account Plan')
+
+@app.route('/admin')
+def admin():
+    return render_template('admin.html', title='Admin')
+
+@app.route('/approvals')
+def approvals():
+    return render_template('approvals.html', title='Approvals')
+
+@app.route('/help')
+def help_page():
+    return render_template('account/help.html', title='Help Center')
+
+@app.route('/signin')
+def signin():
+    return render_template('signin.html', title='Sign In')
+
+@app.route('/signup')
+def signup():
+    return render_template('account/signup.html', title='Sign Up')
 
 if __name__ == '__main__':
     app.run(debug=True)
