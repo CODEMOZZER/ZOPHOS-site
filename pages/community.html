@@ -213,11 +213,14 @@
 
 
     // Check backend for terms agreement per IP
+
+    let ipAgreed = false;
     async function checkTermsAgreed() {
       try {
         const res = await fetch('https://zophos-site-production.up.railway.app/api/terms/agreed');
         const data = await res.json();
-        if (!data.agreed) {
+        ipAgreed = !!data.agreed;
+        if (!ipAgreed) {
           showTermsModal();
         }
       } catch (e) {
@@ -230,26 +233,23 @@
     document.getElementById('agree-terms').onclick = async function() {
       try {
         await fetch('https://zophos-site-production.up.railway.app/api/terms/agreed', { method: 'POST' });
+        ipAgreed = true;
       } catch (e) {}
       hideTermsModal();
     };
     document.getElementById('disagree-terms').onclick = async function() {
       blockTermsModal();
-      // Optionally notify backend of disagreement (could POST with agreed: false)
     };
 
     chatForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // Check backend again before posting
-      let agreed = true;
-      try {
-        const res = await fetch('https://zophos-site-production.up.railway.app/api/terms/agreed');
-        const data = await res.json();
-        agreed = !!data.agreed;
-      } catch (e) { agreed = false; }
-      if (!agreed) {
-        showTermsModal();
-        return;
+      // Only check if not already agreed
+      if (!ipAgreed) {
+        await checkTermsAgreed();
+        if (!ipAgreed) {
+          showTermsModal();
+          return;
+        }
       }
       const username = chatUsername.value.trim() || 'Anonymous';
       const message = chatMessage.value.trim();
