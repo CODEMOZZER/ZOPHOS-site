@@ -142,6 +142,22 @@
       <li class="active"><a href="community.html">Community</a></li>
       <li><a href="dashboard.html">Bot Dashboard</a></li>
     </ul>
+    <div id="navbar-profile" style="margin-left:auto;display:none;align-items:center;gap:10px;">
+      <img id="profile-icon" src="../assets/default_profile.png" alt="Profile" style="height:40px;width:40px;border-radius:50%;object-fit:cover;cursor:pointer;box-shadow:0 2px 8px #7a2cff;" />
+    </div>
+    <!-- Profile Modal -->
+    <div id="profile-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(10,16,32,0.85);z-index:9999;align-items:center;justify-content:center;">
+      <div style="background:#23272a;padding:32px 28px;border-radius:16px;max-width:340px;margin:auto;box-shadow:0 2px 16px #7a2cff;display:flex;flex-direction:column;align-items:center;">
+        <img id="modal-profile-icon" src="../assets/default_profile.png" alt="Profile" style="height:70px;width:70px;border-radius:50%;object-fit:cover;margin-bottom:12px;box-shadow:0 2px 12px #7a2cff;" />
+        <div style="width:100%;margin-bottom:10px;text-align:center;">
+          <span id="modal-username" style="font-size:1.2em;color:#7a2cff;font-weight:bold;"></span>
+        </div>
+        <div style="width:100%;margin-bottom:18px;text-align:center;">
+          <span style="color:#eaf6ff;font-size:1em;">Email: <span id="modal-email" style="background:#181a24;padding:2px 8px;border-radius:6px;"></span></span>
+        </div>
+        <button onclick="hideProfileModal()" class="btn" style="width:100%;">Close</button>
+      </div>
+    </div>
   </nav>
   <div class="content">
     <h1 style="text-align:center;color:#7a2cff;margin-bottom:8px;">Community Forum</h1>
@@ -159,6 +175,36 @@
       <button type="submit" class="btn">Post</button>
     </div>
     <script>
+        // Example user data (replace with real auth integration)
+        const user = {
+          loggedIn: true, // set to false for anonymous
+          username: "JohnDoe",
+          email: "johndoe@gmail.com",
+          profilePic: "../assets/default_profile.png" // or Google profile image
+        };
+
+        // Show profile icon if logged in
+        if (user.loggedIn) {
+          document.getElementById('navbar-profile').style.display = 'flex';
+          document.getElementById('profile-icon').src = user.profilePic;
+        }
+
+        // Profile modal logic
+        document.getElementById('profile-icon').onclick = function() {
+          document.getElementById('profile-modal').style.display = 'flex';
+          document.getElementById('modal-profile-icon').src = user.profilePic;
+          document.getElementById('modal-username').textContent = user.username;
+          // Hide email except first letter
+          const email = user.email;
+          const atIdx = email.indexOf('@');
+          let hiddenEmail = email[0] + "";
+          for (let i = 1; i < atIdx; i++) hiddenEmail += "*";
+          hiddenEmail += email.slice(atIdx);
+          document.getElementById('modal-email').textContent = hiddenEmail;
+        };
+        function hideProfileModal() {
+          document.getElementById('profile-modal').style.display = 'none';
+        }
     const chatBoard = document.getElementById('chat-board');
     const chatForm = document.querySelector('.forum-form');
     const chatMessage = document.getElementById('chat-message');
