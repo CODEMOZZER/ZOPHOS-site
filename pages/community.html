@@ -102,10 +102,15 @@
       <div id="block-msg" style="color:#e74c3c;margin-top:18px;display:none;font-weight:bold;">You must agree to the terms to participate in the community chat.</div>
     </div>
   </div>
-  <footer style="background:rgba(10,16,32,0.98);text-align:center;padding:20px 0;color:#00cfff;box-shadow:0 -2px 12px #00cfff;position:relative;bottom:0;width:100%;font-size:1.08em;text-shadow:0 0 8px #00cfff,0 0 16px #10131a;letter-spacing:1px;">
-    &copy; 2025 ZOPHOS. ALL RIGHTS RESERVED.
-  </footer>
-  <!--#include file="navbar.html" -->
+    <!-- Single copyright footer only -->
+  <div id="navbar-container"></div>
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('navbar-container').innerHTML = html;
+      });
+  </script>
   <div style="background:radial-gradient(ellipse at center,#10131a 60%,#05060a 100%);color:#eaf6ff;min-height:100vh;padding:48px 0;">
     <div class="forum-board" style="background:rgba(10,16,32,0.95);border-radius:10px;box-shadow:0 2px 16px #00cfff,0 0 8px #10131a;border:1px solid #00cfff;padding:24px;margin:32px auto;max-width:900px;">
       <div id="chat-board"></div>
