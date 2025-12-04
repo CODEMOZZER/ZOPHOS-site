@@ -108,6 +108,20 @@
     .btn:hover {
       background: linear-gradient(90deg, #3b0b96 0%, #7a2cff 100%);
     }
+    .profile-menu-item {
+      display:block;
+      padding:12px 18px;
+      color:#eaf6ff;
+      text-decoration:none;
+      font-size:1.04em;
+      border-left:4px solid transparent;
+      transition:background 0.18s,border-left 0.18s;
+    }
+    .profile-menu-item:hover {
+      background:#23272a;
+      border-left:4px solid #7a2cff;
+      color:#7a2cff;
+    }
   </style>
 </head>
 <body>
@@ -172,20 +186,6 @@
         <button id="dropdown-signout" class="btn" style="width:100%;margin:12px 0 0 0;background:linear-gradient(90deg,#7a2cff 0%,#3b0b96 100%);box-shadow:0 0 8px #7a2cff;">Sign Out</button>
       </div>
     </div>
-        .profile-menu-item {
-          display:block;
-          padding:12px 18px;
-          color:#eaf6ff;
-          text-decoration:none;
-          font-size:1.04em;
-          border-left:4px solid transparent;
-          transition:background 0.18s,border-left 0.18s;
-        }
-        .profile-menu-item:hover {
-          background:#23272a;
-          border-left:4px solid #7a2cff;
-          color:#7a2cff;
-        }
     <!-- Profile Modal -->
     <div id="profile-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(10,16,32,0.85);z-index:9999;align-items:center;justify-content:center;">
       <div style="background:#23272a;padding:32px 28px;border-radius:16px;max-width:340px;margin:auto;box-shadow:0 2px 16px #7a2cff;display:flex;flex-direction:column;align-items:center;">
