@@ -40,5 +40,27 @@ def signin():
 def signup():
     return render_template("signup.html")
 
+@app.route("/profile/<username>")
+def profile(username):
+    # Simulated user lookup
+    user = {
+        "username": username,
+        "bio": "Cosmic builder of ZOPHOS.",
+        "profile_url": f"/static/profiles/{username}.png",
+        "banner_url": f"/static/banners/{username}.jpg"
+    }
+    return render_template("profile.html", user=user)
+
+from flask import abort
+
+@app.route("/plan")
+def plan():
+    # Hide the page until it's ready
+    abort(404)  # shows "Not Found"
+    
+@app.route("/help")
+def help():
+    return render_template("account/help.html")
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)

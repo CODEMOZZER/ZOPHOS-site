@@ -1,7 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-  <main class="content">
-    <h1 style="color:#00cfff;font-size:2.2em;margin-bottom:18px;text-shadow:0 0 24px #00cfff,0 0 32px #10131a;letter-spacing:2px;text-align:center;">Bot Dashboard</h1>
-    <p style="font-size:1.2em;color:#b3cfff;text-shadow:0 0 8px #10131a;text-align:center;">Login with Discord to manage your bot. (Coming soon)</p>
-  </main>
+<section class="panel">
+  <h1>Welcome, {{ user.username }}</h1>
+
+  {% if role == "admin" %}
+    <p>You have admin access. Use the tools below to manage the site.</p>
+  {% else %}
+    <p>This is your personal dashboard — here’s how ZOPHOS works and where you can start.</p>
+  {% endif %}
+
+  <div class="dashboard-links">
+    <a href="{{ url_for('profile', username=user.username) }}">View Profile</a>
+    <a href="{{ url_for('settings') }}">Account Settings</a>
+    <a href="{{ url_for('community') }}">Community</a>
+    <a href="{{ url_for('docs') }}">Documentation</a>
+
+    {% if role == "admin" %}
+      <a href="{{ url_for('admin') }}">Admin Panel</a>
+      <a href="{{ url_for('approvals') }}">Approvals</a>
+    {% endif %}
+  </div>
+
+  {% if role != "admin" %}
+  <div class="getting-started">
+    <h2>Getting Started</h2>
+    <ul>
+      <li>Update your profile and banner in <strong>Settings</strong>.</li>
+      <li>Join the <strong>Community</strong> via Roblox.</li>
+      <li>Check out the <strong>Docs</strong> to learn features.</li>
+    </ul>
+  </div>
+  {% endif %}
+</section>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="profile-page">
+  <div class="banner">
+    <img src="{{ user.banner_url }}" alt="Banner">
+  </div>
+  <div class="profile-info">
+    <img class="avatar" src="{{ user.profile_url }}" alt="Profile">
+    <h2>{{ user.username }}</h2>
+    <p>{{ user.bio }}</p>
+  </div>
+</section>
+{% endblock %}
