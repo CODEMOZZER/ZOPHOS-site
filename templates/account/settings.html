@@ -1,22 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-  <main class="content">
-    <div class="settings-banner">
-      <div class="settings-banner-left">
-        <img class="settings-banner-avatar" src="/static/assets/profile%20pic.png" alt="Profile" />
-        <span class="settings-banner-name">Legion</span>
+<section class="panel">
+  <h1>Account Settings</h1>
+  <form method="POST" action="/settings/update" enctype="multipart/form-data">
+    <div class="settings-images">
+      <div class="profile-image">
+        <label>Profile Image (336x336)</label>
+        <input type="file" name="profile_image">
       </div>
-      <div class="settings-banner-right">
-        <button class="settings-edit-btn">Edit Profile</button>
+      <div class="banner-image">
+        <label>Banner Image (2280x500)</label>
+        <input type="file" name="banner_image">
       </div>
     </div>
-    <div class="settings-card">
-      <div class="settings-row"><span>Email</span><span>johndoe@gmail.com</span></div>
-      <div class="settings-row"><span>Role</span><span>Admin</span></div>
-      <div class="settings-row"><span>Account Tier</span><span>Gold</span></div>
-      <div class="settings-row"><span>Password</span><span>******** <a href="#" style="color:#7a2cff;">Change</a></span></div>
-      <div class="settings-row"><span>Notifications</span><span>Enabled</span></div>
-      <div class="settings-row"><span>2FA</span><span>Disabled <a href="#" style="color:#7a2cff;">Enable</a></span></div>
+
+    <div class="settings-fields">
+      <label>Username</label>
+      <input type="text" name="username" value="{{ user.username }}">
+
+      <label>Bio <small>(max 110 characters)</small></label>
+      <textarea name="bio" maxlength="110">{{ user.bio }}</textarea>
+
+      <!-- Email field removed for now -->
+
+      <label>Twitter</label>
+      <input type="text" name="twitter" value="{{ user.twitter }}">
+
+      <label>Instagram</label>
+      <input type="text" name="instagram" value="{{ user.instagram }}">
+
+      <label>Website</label>
+      <input type="text" name="website" value="{{ user.website }}">
     </div>
-  </main>
+
+    <button type="submit" class="btn primary">Save Changes</button>
+  </form>
+</section>
 {% endblock %}
